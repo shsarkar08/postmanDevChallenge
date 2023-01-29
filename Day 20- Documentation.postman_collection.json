@@ -1,0 +1,347 @@
+{
+	"info": {
+		"_postman_id": "01de6da3-b478-479c-aab1-979ab0b61518",
+		"name": "Day 20: Documentation",
+		"description": "## Instructions for Day 20: Documentation\n\n1.  **Get the challenge:** Fork [the parent collection `Day 20: Documentation`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-0f00502d-d2d8-45fc-bd69-0fbb68eb5733) from the main workspace to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [Documenting your API](https://learning.postman.com/docs/publishing-your-api/documenting-your-api/)\n    \n\n## Additional resources\n\n*   [The Good Documentation checklist](https://blog.postman.com/postman-good-documentation-checklist/)\n*   [The Ultimate API Publisher's Guide](https://medium.com/better-practices/the-ultimate-api-publishers-guide-be74a2692326)\n*   [Documentation](https://www.tiktok.com/@joycejetson/video/7072797681902521643) tiktok\n    \n\n## Next challenge\n\n*   [WebSockets](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-8b2c3197-1df3-44ba-9687-eba60470d270)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16143001"
+	},
+	"item": [
+		{
+			"name": "Documentation",
+			"item": [
+				{
+					"name": "visualizer Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `\r",
+									"    <table bgcolor=\"#00FFEF\">\r",
+									"        <tr>\r",
+									"            <th>Name</th>\r",
+									"            <th>URL</th>\r",
+									"        </tr>\r",
+									"\r",
+									"        {{#each response.results}}\r",
+									"            <tr>\r",
+									"                <td>{{name}}</td>\r",
+									"                <td>{{url}}</td>\r",
+									"            </tr>\r",
+									"        {{/each}}\r",
+									"    </table>\r",
+									"`;\r",
+									"\r",
+									"pm.visualizer.set(template, {\r",
+									"    // Pass the response body parsed as JSON as `data`\r",
+									"    response: pm.response.json()\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://pokeapi.co/api/v2/type",
+							"protocol": "https",
+							"host": [
+								"pokeapi",
+								"co"
+							],
+							"path": [
+								"api",
+								"v2",
+								"type"
+							]
+						},
+						"description": "## Pokemon API\n\n1. This is copied from [`Day 17: Visualizations`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-0b4d01c7-25b5-4296-91e2-bad1baaf3c6d)\n    \n\n## Request Description\n\nThis `GET` request returns all pokemon types with url to request further\n\n### Params\n\nname : Using `name` in the query parameter returns specific pokemon type and url"
+					},
+					"response": [
+						{
+							"name": "visualizer Copy",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://pokeapi.co/api/v2/type",
+									"protocol": "https",
+									"host": [
+										"pokeapi",
+										"co"
+									],
+									"path": [
+										"api",
+										"v2",
+										"type"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 29 Jan 2023 07:15:13 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=86400, s-maxage=86400"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"4ea-sMRK9ahboOvZM874KpSIf4Au/mo\""
+								},
+								{
+									"key": "function-execution-id",
+									"value": "pcidtka6ae8q"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=31556926"
+								},
+								{
+									"key": "x-cloud-trace-context",
+									"value": "9360b651ad0c1f094bcc256b05205f90"
+								},
+								{
+									"key": "x-country-code",
+									"value": "SG"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-served-by",
+									"value": "cache-qpg1276-QPG"
+								},
+								{
+									"key": "x-cache",
+									"value": "MISS"
+								},
+								{
+									"key": "x-cache-hits",
+									"value": "0"
+								},
+								{
+									"key": "x-timer",
+									"value": "S1674931849.917680,VS0,VE586"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding,cookie,need-authorization, x-fh-requested-host, accept-encoding"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "HIT"
+								},
+								{
+									"key": "Age",
+									"value": "44664"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=CzGprDD7Bs85NrrWTZibxyL1fFni2w5C5zSyzZDZafSZKtGx64V6WwbHrXdLoRdrGxgbMFZG08aOLp5tSZFvcLvDW8Anx5Itghsraz2e2nsCV48FqaZKCykEMyyg\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "79102cebdb324c9b-SIN"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 20,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"name\": \"normal\",\n            \"url\": \"https://pokeapi.co/api/v2/type/1/\"\n        },\n        {\n            \"name\": \"fighting\",\n            \"url\": \"https://pokeapi.co/api/v2/type/2/\"\n        },\n        {\n            \"name\": \"flying\",\n            \"url\": \"https://pokeapi.co/api/v2/type/3/\"\n        },\n        {\n            \"name\": \"poison\",\n            \"url\": \"https://pokeapi.co/api/v2/type/4/\"\n        },\n        {\n            \"name\": \"ground\",\n            \"url\": \"https://pokeapi.co/api/v2/type/5/\"\n        },\n        {\n            \"name\": \"rock\",\n            \"url\": \"https://pokeapi.co/api/v2/type/6/\"\n        },\n        {\n            \"name\": \"bug\",\n            \"url\": \"https://pokeapi.co/api/v2/type/7/\"\n        },\n        {\n            \"name\": \"ghost\",\n            \"url\": \"https://pokeapi.co/api/v2/type/8/\"\n        },\n        {\n            \"name\": \"steel\",\n            \"url\": \"https://pokeapi.co/api/v2/type/9/\"\n        },\n        {\n            \"name\": \"fire\",\n            \"url\": \"https://pokeapi.co/api/v2/type/10/\"\n        },\n        {\n            \"name\": \"water\",\n            \"url\": \"https://pokeapi.co/api/v2/type/11/\"\n        },\n        {\n            \"name\": \"grass\",\n            \"url\": \"https://pokeapi.co/api/v2/type/12/\"\n        },\n        {\n            \"name\": \"electric\",\n            \"url\": \"https://pokeapi.co/api/v2/type/13/\"\n        },\n        {\n            \"name\": \"psychic\",\n            \"url\": \"https://pokeapi.co/api/v2/type/14/\"\n        },\n        {\n            \"name\": \"ice\",\n            \"url\": \"https://pokeapi.co/api/v2/type/15/\"\n        },\n        {\n            \"name\": \"dragon\",\n            \"url\": \"https://pokeapi.co/api/v2/type/16/\"\n        },\n        {\n            \"name\": \"dark\",\n            \"url\": \"https://pokeapi.co/api/v2/type/17/\"\n        },\n        {\n            \"name\": \"fairy\",\n            \"url\": \"https://pokeapi.co/api/v2/type/18/\"\n        },\n        {\n            \"name\": \"unknown\",\n            \"url\": \"https://pokeapi.co/api/v2/type/10001/\"\n        },\n        {\n            \"name\": \"shadow\",\n            \"url\": \"https://pokeapi.co/api/v2/type/10002/\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"description": "It's time to work on your next challenge.\n\n1. **Document a request**: Add a single request to the folder `Documentation`. It can be a request from an API we've used previously or any API that you like. \n\n You've been reading the documentation for instructions on each of these challenges thus far. These [descriptions](https://learning.postman.com/docs/publishing-your-api/authoring-your-documentation/#documenting-with-descriptions) provide more information about a collection, folder, request, parameter, or header and are [formatted in Markdown](https://learning.postman.com/docs/publishing-your-api/authoring-your-documentation/#markdown-demo-collection). Include the following to explain how to use the endpoint:\n  - Request description formatted in Markdown\n  - Include at least one hyperlink to official documentation in the request description\n  - Parameter description if you add any parameters\n  - Header description if you add any headers\n  - Save a successful response from the server as [an example](https://learning.postman.com/docs/sending-requests/examples/#response-from-the-server)\n\n1. **Optional enhancements**: If it will help the user better understand how to use the endpoint, include the following (optional):\n  - [Visualize](https://learning.postman.com/docs/sending-requests/visualizer/) the response to help the user interpret the data\n  - [Test](https://learning.postman.com/docs/writing-scripts/test-scripts/) to aid users who experience unexpected errors\n  - Screenshot to aid users, for example, showing users where to get an API key\n  - More examples demonstrating an unsuccessful response and other scenarios\n  - **Do not to leak any secrets!** \n\n  Send your request to ensure a successful response and save your changes.\n\nOnce you complete these steps, move on to the next folder in this collection to submit your solution. Follow the instructions in the request documentation.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 5\r",
+									"\r",
+									"let collection = pm.response.json().collection\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct collection returned\", () => {\r",
+									"    pm.expect(collection.info.name).equals(\"Day 20: Documentation\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Request added correctly\", () => {\r",
+									"    pm.expect(collection.item[0].item.length, 'check number of requests').is.greaterThan(0)\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Documentation added correctly\", () => {\r",
+									"    let firstRequest = collection.item[0].item[0]\r",
+									"\r",
+									"    pm.expect(firstRequest.request.description, 'check request description').to.exist\r",
+									"    let firstMarkdownLinkRegex = /\\[(.+)\\]\\((.+)\\)/\r",
+									"    pm.expect(firstRequest.request.description.match(firstMarkdownLinkRegex).length, 'check hyperlink').to.equal(3)\r",
+									"\r",
+									"    if (firstRequest.request.url.query) {\r",
+									"        firstRequest.request.url.query.forEach( (param) => {\r",
+									"            pm.expect(param.description, 'check param description').to.exist\r",
+									"        })\r",
+									"        pm.expect(firstRequest.request.url.query.forEach( (param) => { param.description}))\r",
+									"    }\r",
+									"\r",
+									"    if (firstRequest.request.header) {\r",
+									"        firstRequest.request.header.forEach( (header) => {\r",
+									"            pm.expect(header.description, 'check header description').to.exist\r",
+									"        })\r",
+									"    }\r",
+									"\r",
+									"    pm.expect(firstRequest.response, 'check saved example').to.not.be.empty\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media1.giphy.com/media/c5eqVJN7oNLTq/giphy.gif?cid=ecf05e47ipdv9pm2ugb4rtqppcg4f291wve7s75ha1xocqhl&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media3.giphy.com/media/V6vNqIGP1RiMEwmMGV/giphy.gif?cid=ecf05e47dcpl5voxfkaw0l814ohtu15kcyvfe5x9lvyvc0sq&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.getpostman.com/collections/16143001-01de6da3-b478-479c-aab1-979ab0b61518",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"collections",
+								"16143001-01de6da3-b478-479c-aab1-979ab0b61518"
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Use a Postman environment:** Find the `Postman API env` environment from the previous challenge. Update the `collectionUid` with the current collection's ID.\n1. **Validate your solution**: Save your changes in the collection and environment. Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, you are done with today's challenge. Remember to save your changes as you'll need to pass all the challenges to claim a **30 days of Postman** badge."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

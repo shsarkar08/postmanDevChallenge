@@ -1,0 +1,208 @@
+{
+	"info": {
+		"_postman_id": "c82a18d2-564b-41d1-a18a-77d58c3649d3",
+		"name": "Day 18: API specifications",
+		"description": "## Instructions for Day 18: API specifications\n\n1.  **Get the challenge:** Fork [the parent collection `Day 18: API specifications`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-c385b569-e55a-4d4f-b252-51a33311ca78) from the main workspace to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [Importing API specifications](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#importing-api-specifications)\n*   [Using the API Builder](https://learning.postman.com/docs/designing-and-developing-your-api/the-api-workflow/)\n    \n\n## Additional resources\n\n*   [How Postman Uses the OpenAPI Specification](https://blog.postman.com/openapi-specification-postman-how-to/) blog\n*   [API specifications](https://www.tiktok.com/@joycejetson/video/7071254597150510378) tiktok\n    \n\n## Next challenge\n\n*   [GraphQL](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-bd7ff4ba-c209-47b3-85d7-514a7ce0f3bf)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16143001"
+	},
+	"item": [
+		{
+			"name": "API specifications",
+			"item": [],
+			"description": "It's time to work on your next challenge.\n\nThe Postman [API Builder](https://learning.postman.com/docs/designing-and-developing-your-api/the-api-workflow/) supports API-first development by allowing you to generate collections from your schema and build your development and testing from there.\n\n> If you're working on Postman v9, there are slight differences in the User Interface compared to Postman v10. However, the functionality is similar.\n\n1. **Import an API specification**: Select the **Import** button, tab over to **Link**, and input the following URL to [import the API specification](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#importing-api-specifications) into Postman. In v9, leave the checkbox filled to also generate a collection as \"Documentation\". In v10, a collection is automatically generated, so make sure under Import Settings to select \"Copy collections to workspace\".\n    - `https://raw.githubusercontent.com/postmanlabs/spectral-postman/master/cosmos2.yaml`\n2. **Validate schema**: Under the **APIs** tab in the sidebar, find the imported API `Cosmos`. Review the API definition. This describes your API so both humans and machines can read it. Postman will [validate the schema](https://learning.postman.com/docs/designing-and-developing-your-api/validating-elements-against-schema/#validating-schema) according to your configuration, highlighting any errors in each row and summarizing issues at the bottom.\n3. **Validate elements**: In v9 under the **Documentation** tab, find the generated documentation collection `Cosmos`. Postman will [validate elements](https://learning.postman.com/docs/designing-and-developing-your-api/validating-elements-against-schema/#validating-elements) like mocks, monitors, and collections. \"Click to Validate\" to highlight any issues or discrepancies compared to the associated API schema.  \n    In v10, you can browse documentation under the Definition. And select the API to see how to connect a repository, test, and deploy the API.\n4. **Validate requests**: Find the generated collection `Cosmos`. **Send** a request, and Postman will once again [identify issues](https://learning.postman.com/docs/designing-and-developing-your-api/validating-elements-against-schema/#validating-requests) or discrepancies compared to the associated API schema at the top near the request name. If you see any issues, think about how you might resolve them.\n    \n\nOnce you complete these steps, move on to the next folder in this collection to submit your solution. Follow the instructions in the request documentation.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 3\r",
+									"\r",
+									"let collection = pm.response.json().collection\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct collection returned\", () => {\r",
+									"    pm.expect(collection.info.name).equals(\"Cosmos\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media1.giphy.com/media/Qw75aRmhdpEuntisgj/giphy.gif?cid=ecf05e47cn3n7rk8t4hh8znpnk60pdjky81e5iiiwzgleqvb&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media2.giphy.com/media/L5WQjD4p8IpO0/giphy.gif?cid=ecf05e47ikwls7yxaqa45w6aeyye714aaqwvh2a01bka85j4&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.getpostman.com/collections/16143001-438c64f8-29e2-4481-a9c9-06b7d09b427d",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"collections",
+								"16143001-438c64f8-29e2-4481-a9c9-06b7d09b427d"
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Use a Postman environment:** Find the `Postman API env` environment from the previous challenge. Instead of checking this collection `Day 18: API specifications`, update the `collectionUid` with the ID for the generated collection `Cosmos`.\n1. **Validate your solution**: Save your changes in the collection and environment. Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, move on to the next validation."
+					},
+					"response": []
+				},
+				{
+					"name": "submit api",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests",
+									"let pass = 0",
+									"let totalToPass = 3",
+									"",
+									"let api = pm.response.json().api",
+									"",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {",
+									"    pm.expect(true);",
+									"    pass += 1",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"    pass += 1",
+									"});",
+									"",
+									"pm.test(\"Correct API returned\", () => {",
+									"    pm.expect(api.name).equals(\"Cosmos\")",
+									"    pass += 1",
+									"})",
+									"",
+									"// visualization for test results",
+									"let template",
+									"if (pass == totalToPass) {",
+									"    template = `🍪 passing!",
+									"        <br />",
+									"        <img src=\"https://media1.giphy.com/media/ozQ1tgf2e8fvy/giphy.gif?cid=ecf05e47cn3n7rk8t4hh8znpnk60pdjky81e5iiiwzgleqvb&rid=giphy.gif&ct=g\" />",
+									"    `",
+									"} else {",
+									"    template = `🙅 please try again",
+									"        <br />",
+									"        <img src=\"https://media4.giphy.com/media/tuQXxbPB2SEIiJeBkj/giphy.gif?cid=ecf05e47chvd5qlxmmvvewjq19zute4hoisawouxg1watuy7&rid=giphy.gif&ct=g\" />",
+									"    `",
+									"}",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.getpostman.com/apis/{{apiId}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"apis",
+								"{{apiId}}"
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Use a Postman environment:** Find the `Postman API env` environment from the previous challenge. Add an environment variable called `apiId` with a value of the ID for the imported API `Cosmos`.\n1. **Validate your solution**: Save your changes in the collection and environment. Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, you are done with today's challenge. Remember to save your changes as you'll need to pass all the challenges to claim a **30 days of Postman** badge."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
