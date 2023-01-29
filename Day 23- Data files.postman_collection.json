@@ -1,0 +1,209 @@
+{
+	"info": {
+		"_postman_id": "754e1e8b-c535-4a8b-8e74-7aa9acd5a7eb",
+		"name": "Day 23: Data files",
+		"description": "## Instructions for Day 23: Data files\n\n1.  **Get the challenge:** Fork [the parent collection `Day 23: Data files`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-087bf975-4820-44b2-82be-2664a55d9958) from the main workspace to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [Working with data files](https://learning.postman.com/docs/running-collections/working-with-data-files/)\n    \n\n## Additional resources\n\n*   [Looping through a data file with the Postman collection runner](https://blog.postman.com/looping-through-a-data-file-in-the-postman-collection-runner/) blog\n*   [Loop through a data file](https://youtu.be/RH8b3gbujPY) video\n*   [Data files](https://www.tiktok.com/@joycejetson/video/7073858695431638318) tiktok\n    \n\n## Next challenge\n\n*   [Using libraries](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-c8009938-a174-48d3-82b2-8b2137068508)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16143001"
+	},
+	"item": [
+		{
+			"name": "Data files",
+			"item": [
+				{
+					"name": "boba",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(pm.iterationData.get(\"Region\",\"boba\"))"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const resp = pm.response.json()\r",
+									"\r",
+									"pm.test(\"Texas region is present in Data file\",()=>{\r",
+									"    pm.expect(pm.iterationData.get(\"Region\")).to.include('Texas')\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://postman-echo.com/get?{{Region}}={{boba}}",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"get"
+							],
+							"query": [
+								{
+									"key": "{{Region}}",
+									"value": "{{boba}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "It's time to work on your next challenge.\n\nLet's run a collection using data from a file. We will complete this challenge using a data file about the 2nd best food containing chewy balls: boba. Export your own file from Google Search Trends about [the volume of searches for “boba” by state](https://trends.google.com/trends/explore?geo=US&q=boba), or download the following example file:\n\n  - [CSV file of Boba searches](https://assets.postman.com/postman-docs/geoMap.csv)\n\nYour file should be formatted like this:\n\n![[screenshot](https://assets.postman.com/postman-docs/Screen+Shot+2021-03-19+at+11.49.34+AM.png)](https://assets.postman.com/postman-docs/Screen+Shot+2021-03-19+at+11.49.34+AM.png)\n\n1. **Add a request**: Add a request called `boba` to the folder `Data files` with the following details:\n  - `GET` method\n  - `https://postman-echo.com/get` request URL\n\n  [Postman's Echo API](https://learning.postman.com/docs/developer/echo-api/) echoes back whatever we send in the request. Let's retrieve information from the data file to send to this API.\n1. **Access data in text fields**: Add a query parameter called <code>\\{{Region\\}}</code>, with a value called <code>\\{{boba\\}}</code>. These variables won't be defined until we loop through the data file.\n1. **Access data in a script**: Under the **Pre-request Script** tab, [log a value from your data file](https://learning.postman.com/docs/running-collections/working-with-data-files/#accessing-data-file-values).\n1. **Write a test**: Under the **Tests** tab, write a test. Feel free to access the information from the data file if you'd like.\n1. **Run the folder**: Run the folder `Data files` in [the collection runner using data from the CSV file](https://learning.postman.com/docs/running-collections/working-with-data-files/#running-collections-with-data-files). Verify that your pre-request script, query params, and test are pulling data as expected from the data file.\n\nOnce you complete these steps, save your changes and move on to the next folder in this collection to submit your solution. Follow the instructions in the request documentation.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 5\r",
+									"\r",
+									"let collection = pm.response.json().collection\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct collection returned\", () => {\r",
+									"    pm.expect(collection.info.name).equals(\"Day 23: Data files\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Request added correctly\", () => {\r",
+									"    pm.expect(collection.item[0].item.length, 'check number of requests').equals(1)\r",
+									"\r",
+									"    let bobaRequest = collection.item[0].item.find(req => { return req.name === \"boba\"})\r",
+									"    pm.expect(bobaRequest.name, 'check name').equals(\"boba\")\r",
+									"    pm.expect(bobaRequest.request.method, 'check method').equals(\"GET\")\r",
+									"    pm.expect(bobaRequest.request.url.raw, 'check url').equals(\"https://postman-echo.com/get?{{Region}}={{boba}}\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Scripts added correctly\", () => {\r",
+									"    let bobaRequest = collection.item[0].item.find(req => { return req.name === \"boba\"})\r",
+									"    let prereq = bobaRequest.event.find(event => { return event.listen === \"prerequest\" })\r",
+									"    pm.expect(prereq.listen, 'check pre script').equals(\"prerequest\")\r",
+									"    pm.expect(prereq.script.exec.toString(), 'check pscript syntax').to.include(\"pm.iterationData.get\")\r",
+									"    pm.expect(prereq.script.exec.toString(), 'check pscript log').to.include(\"console.log\")\r",
+									"    let test = bobaRequest.event.find(event => { return event.listen === \"test\" })\r",
+									"    pm.expect(test.listen, 'check test script').equals(\"test\")\r",
+									"    pm.expect(test.script.exec.toString(), 'check tscript syntax').to.include(\"pm.test\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media2.giphy.com/media/oNhDOS8SauQSI/giphy.gif?cid=ecf05e47sd07s5o4qm79aij59rkszfkygen8i5ftdci9h8tl&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media0.giphy.com/media/Kan1AHHJmMRYA/giphy.gif?cid=ecf05e47qesmkuchhr6rzpjaplguwpkzxyie7wfhqrkm2vsg&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.getpostman.com/collections/{{collectionId}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"collections",
+								"{{collectionId}}"
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Use a Postman environment:** Find the `Postman API env` environment from the previous challenge. Update the `collectionUid` with the current collection's ID.\n1. **Validate your solution**: Save your changes in the collection and environment. Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, you are done with today's challenge. Remember to save your changes as you'll need to pass all the challenges to claim a **30 days of Postman** badge."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

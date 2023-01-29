@@ -1,0 +1,56 @@
+{
+	"info": {
+		"_postman_id": "13eca28e-effa-42ef-a9fd-c10a1e817cbe",
+		"name": "Day 22: Public profile",
+		"description": "## Instructions for Day 22: Public profile\n\n1.  **Get the challenge:** Fork [the parent collection `Day 22: Public profile`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-5cbfbc58-e32f-4e62-b6ee-558b38701d71) from the main workspace to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n    \n\n## Concepts covered\n\n*   [Making your profile public](https://learning.postman.com/docs/getting-started/postman-account/#making-your-profile-public)\n*   [Commenting on collections](https://learning.postman.com/docs/collaborating-in-postman/commenting-on-collections)\n    \n\n## Additional resources\n\n*   [Public Profiles](https://youtu.be/w-EgqQ8Anvw) video\n*   [Comments](https://youtu.be/fkYiyCj43uk) video\n*   [Public profile](https://www.tiktok.com/@joycejetson/video/7073479009077808430) tiktok\n    \n\n## Next challenge\n\n*   [Data files](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-087bf975-4820-44b2-82be-2664a55d9958)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16143001"
+	},
+	"item": [
+		{
+			"name": "Public profile",
+			"item": [],
+			"description": "It's time to work on your next challenge.\n\n1. **Groom your public profile**: You've already [enabled your public profile](https://go.postman.co/settings/me). Now let's put our best foot forward.\n  - Add a public profile and cover photo\n  - Add a brief bio\n  - Add a link to your website or social media accounts\n  - Find the `Public profile URL` to see what it looks like\n1. **Update your public workspace overview**: You've already updated the [visibility of your workspace to public](https://learning.postman.com/docs/collaborating-in-postman/using-workspaces/creating-workspaces/#creating-a-public-workspace). Click on the workspace name next to the globe icon in the top left to open the overview tab. Here's some optional suggestions to personalize this workspace:\n  - Update the summary and description\n  - Change the name of the workspace \n\n  At the bottom, review a count of all the collections you've forked to this workspace, along with all the other entities and a running log of your updates.\n1. **Leave a comment**: Leave a [comment](https://learning.postman.com/docs/collaborating-in-postman/commenting-on-collections/#commenting-on-a-collection) on the collection or folder and [tag](https://learning.postman.com/docs/collaborating-in-postman/commenting-on-collections/#tagging-members-in-comments) yourself in the comment.\n1. **Search for your workspace**: Use the search bar in the top center to find your public workspace. This will be easier to find if you gave your workspace a unique name in the first challenge. Updates to this data will take a while to index in the search results.\n\nThat's all for this challenge. There is no local validation check this time, but this information will come in handy for the final check.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

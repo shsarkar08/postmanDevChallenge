@@ -1,0 +1,227 @@
+{
+	"info": {
+		"_postman_id": "7ee6a853-9335-4946-9543-377bbf082fc3",
+		"name": "Day 24: Using libraries",
+		"description": "## Instructions for Day 24: Using libraries\n\n1.  **Get the challenge:** Fork [the parent collection `Day 24: Using libraries`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-c8009938-a174-48d3-82b2-8b2137068508) from the main workspace to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [Dynamic variables using faker library](https://learning.postman.com/docs/writing-scripts/script-references/variables-list/)\n*   [Using external libraries](https://learning.postman.com/docs/writing-scripts/script-references/postman-sandbox-api-reference/#using-external-libraries)\n    \n\n## Additional resources\n\n*   [Using libraries](https://www.tiktok.com/@joycejetson/video/7074945372291943723) tiktok\n    \n\n## Next challenge\n\n*   [Dynamic request bodies](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-2f480c99-4608-4210-b3c5-5a75c7e7a384)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16143001"
+	},
+	"item": [
+		{
+			"name": "Using libraries",
+			"item": [
+				{
+					"name": "random chuck norris",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.chucknorris.io/jokes/search?query={{$randomWord}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"chucknorris",
+								"io"
+							],
+							"path": [
+								"jokes",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "{{$randomWord}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "moments in time",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var moment = require('moment')\r",
+									"\r",
+									"now = moment()\r",
+									"after_2_days = now.add('2','days')\r",
+									"\r",
+									"console.log(after_2_days.format('dddd'))"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://worldtimeapi.org/api/ip",
+							"protocol": "http",
+							"host": [
+								"worldtimeapi",
+								"org"
+							],
+							"path": [
+								"api",
+								"ip"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "It's time to work on your next challenge.\n\n1. **Add a request**: Add a request called `random chuck norris` to the folder `Using libraries` with the following details:\n  - `GET` request method\n  -`https://api.chucknorris.io/jokes/search` request URL\n  - Query param `query` with a value <code>\\{{$randomWord\\}}</code>\n\n  Postman uses the faker library to generate dummy data like <code>\\{{$randomWord\\}}</code>. Check out the other [dynamic variables](https://learning.postman.com/docs/writing-scripts/script-references/variables-list/) you can use in Postman.\n\n  Send the request. You may need to try a few times to get search results. Postman generates <code>\\{{$randomWord\\}}</code> at the time of execution, so you can see what Postman is sending by inspecting [the console](https://learning.postman.com/docs/sending-requests/troubleshooting-api-requests/#debugging-and-logs), or looking at the [client code generation](https://learning.postman.com/docs/developer/code-generators/) in the context bar to the right.\n\n1. **Add another request**: Add a second request called `moments in time` with the following details:\n  - `GET` request method\n  - `http://worldtimeapi.org/api/ip` request URL\n\n  Under the **Tests** tab, add a script to run after the request to determine what day is two days from now using a [built-in library](https://learning.postman.com/docs/writing-scripts/script-references/postman-sandbox-api-reference/#using-external-libraries) called Moment.js. Log your answer to the console. So if you are working on a Monday, this is what you would see in the console:\n```\n\"Wednesday\"\n```\n1. **Other external libraries**: In addition to the [built-in libraries available in the Postman sandbox](https://learning.postman.com/docs/writing-scripts/script-references/postman-sandbox-api-reference/#using-external-libraries), there are ways to use other external libraries. Libraries served via content delivery network (CDN) can be [stored as a variable](https://community.postman.com/t/adding-external-libraries-to-postman/1971/4) or [retrieved with an API call](https://community.postman.com/t/adding-external-libraries-to-postman/1971/7). Libraries served on your localhost, as a [local package](https://github.com/matt-ball/postman-external-require) or [via npm](https://gist.github.com/kevinswiber/d15fcd73440a5df7511150ed78843e16), can also be retrieved with an API call. If you're using the Postman visualizer, you can [add the external library URL](https://learning.postman.com/docs/sending-requests/visualizer/#adding-styling-and-interaction-to-visualizations) to a `<script>` tag in the template code.\n\nThis challenge covered how you can use libraries in Postman. You can also use a variety of [Postman resources](https://learning.postman.com/docs/developer/resources-intro/) in your own development projects, including APIs and libraries.\n\nOnce you complete these steps, save your changes and move on to the next folder in this collection to submit your solution. Follow the instructions in the request documentation.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 5\r",
+									"\r",
+									"let collection = pm.response.json().collection\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct collection returned\", () => {\r",
+									"    pm.expect(collection.info.name).equals(\"Day 24: Using libraries\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Request added correctly\", () => {\r",
+									"    pm.expect(collection.item[0].item.length, 'check number of requests').equals(2)\r",
+									"\r",
+									"    let chuckRequest = collection.item[0].item.find(req => { return req.name === \"random chuck norris\"})\r",
+									"    pm.expect(chuckRequest.name, 'check name').equals(\"random chuck norris\")\r",
+									"\r",
+									"    let momentRequest = collection.item[0].item.find(req => { return req.name === \"moments in time\"})\r",
+									"    pm.expect(momentRequest.name, 'check name').equals(\"moments in time\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Scripts added correctly\", () => {\r",
+									"    let chuckRequest = collection.item[0].item.find(req => { return req.name === \"random chuck norris\"})\r",
+									"    pm.expect(chuckRequest.request.url.raw, 'check chuck url').equals(\"https://api.chucknorris.io/jokes/search?query={{$randomWord}}\")\r",
+									"    pm.expect(chuckRequest.request.method, 'check chuck method').equals(\"GET\")\r",
+									"\r",
+									"    let momentRequest = collection.item[0].item.find(req => { return req.name === \"moments in time\"})\r",
+									"    pm.expect(momentRequest.request.url.raw, 'check moment url').equals(\"http://worldtimeapi.org/api/ip\")\r",
+									"    pm.expect(momentRequest.request.method, 'check moment method').equals(\"GET\")\r",
+									"    let test = momentRequest.event.find(event => { return event.listen === \"test\" })\r",
+									"    pm.expect(test.listen, 'check moment test script').equals(\"test\")\r",
+									"    pm.expect(test.script.exec.toString(), 'check log').to.include(\"console.log\")\r",
+									"    pm.expect(test.script.exec.toString(), 'check moment library').to.include(\"moment\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media0.giphy.com/media/M1DaLGxFGS6o8/giphy.gif?cid=ecf05e47r4ljgdpimsos3p4oxxh5d3ljht10mm9fc1gm4rm2&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media2.giphy.com/media/xTg8B47N8waMBhp0qc/giphy.gif?cid=ecf05e47hjm1easadg89lej64ps1pq3m8b4l3vo3frv9ypnd&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.getpostman.com/collections/{{collectionId}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"collections",
+								"{{collectionId}}"
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Use a Postman environment:** Find the `Postman API env` environment from the previous challenge. Update the `collectionUid` with the current collection's ID.\n1. **Validate your solution**: Save your changes in the collection and environment. Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, you are done with today's challenge. Remember to save your changes as you'll need to pass all the challenges to claim a **30 days of Postman** badge."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

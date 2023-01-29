@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "2f8ed8b6-9a99-4852-8654-a7ebfc12b866",
+		"name": "Day 21: WebSockets",
+		"description": "## Instructions for Day 21: WebSockets\n\n1.  **Get the challenge:** Fork [the parent collection `Day 21: WebSockets`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-8b2c3197-1df3-44ba-9687-eba60470d270) from the main workspace to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [Using WebSocket Requests](https://learning.postman.com/docs/sending-requests/supported-api-frameworks/websocket/)\n*   [Websockets](https://www.tiktok.com/@joycejetson/video/7073108636666481966) tiktok\n    \n\n## Additional resources\n\n*   [WebSocket Requests](https://youtu.be/H-7EZVj9D-k) video\n    \n\n## Next challenge\n\n*   [Public profile](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-5cbfbc58-e32f-4e62-b6ee-558b38701d71)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16143001"
+	},
+	"item": [
+		{
+			"name": "WebSockets",
+			"item": [],
+			"description": "It's time to work on your next challenge.\n\nPostman is popularly known as an HTTP client, but it now supports the WebSocket protocol too. Depending on when you're discovering this challenge, you may need to complete this challenge in the Postman web client. Let's explore an endpoint that checks whether the message sent to it is in a valid JSON format or not.\n\n1. **Create a WebSockets connection**: Select the **New** button at the top of the sidebar. Select **WebSocket Request** and input the following connection details.\n  - `Raw` request type\n  - `wss://ws.postman-echo.com/raw/json` server URL\n\n  This particular endpoint does not require additional parameters or headers. Hit **Connect** to establish a persistent connection.\n1. **Send a message**: Now that you established a connection, it's time to send a message. This endpoint checks if messages are valid JSON. In the message editor, start by sending something we know is not proper JSON. Compose a new message like the following:\n```\n{\n    \"payload\": hello\n}\n```\n\n  Select the JSON type at the bottom of your message to see Postman's syntax highlighting. Hit **Send**.\n\n  Beneath the message editor, you can see the message you sent and the message back from the server. If you received an error, inspect the error message. Then try sending more messages that you know are not valid JSON, like your name.\n1. **Send another message**: The JSON standard requires double quotes surrounding string values. Your first message was missing double quotes around `hello`. Update your previous message to something you believe is properly formatted JSON, like the following. \n```\n{\n    \"payload\": \"hello\"\n}\n```\n\n  Once you successfully send a JSON message to the server, save the message you sent as a message called `Successful JSON`. \n\n  This particular endpoint may terminate the WebSocket connection after sending a successful message. If you're curious about the WebSocket handshake details, expand the connection details.\n1. **Save to a collection**: Save the request to a new collection called `WebSockets`. Make a note of the new collection's ID and copy it to your clipboard.\n\nOnce you complete these steps, move on to the next folder in this collection to submit your solution. Follow the instructions in the request documentation.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit collection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 3\r",
+									"\r",
+									"let collection = pm.response.json().collection\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"WebSockets collection returned\", () => {\r",
+									"    pm.expect(pm.response.json().args.collectionUid.length).equals(24)\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media0.giphy.com/media/timWG1lyyfcYw/giphy.gif?cid=ecf05e475cbdn7l6p82og1oiqkf34bmkwpsvyy0hv8gkytz6&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media3.giphy.com/media/1wnFW93k6TTDbR8PNq/giphy.gif?cid=ecf05e47h2shm478z4y5yoco87wnbm54b6awdi892syq3a43&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://postman-echo.com/get?collectionUid=63d6202e9d65d6a219fe7122",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"get"
+							],
+							"query": [
+								{
+									"key": "collectionUid",
+									"value": "63d6202e9d65d6a219fe7122"
+								}
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Enter your data:** Under the **Params** tab, find the key `collectionUid`. Replace the value `your-collection-id-here` with your own `WebSockets` collection ID (not this current collection's ID).\n1. **Validate your solution**: Save your changes in the collection. Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, move on to the next request."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
