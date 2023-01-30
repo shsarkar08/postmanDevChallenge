@@ -1,0 +1,248 @@
+{
+	"info": {
+		"_postman_id": "e223fc38-6da2-4680-9668-ff3f5f275d20",
+		"name": "Day 25: Dynamic request bodies",
+		"description": "## Instructions for Day 25: Dynamic request bodies\n\n1.  **Get the challenge:** Fork [the parent collection `Day 25: Dynamic request bodies`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-2f480c99-4608-4210-b3c5-5a75c7e7a384) from the main workspace to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [Variables](https://learning.postman.com/docs/sending-requests/variables/)\n*   [Scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/)\n*   [Using dynamic variables](https://learning.postman.com/docs/writing-scripts/script-references/variables-list/)\n*   [Sending asynchronous requests](https://learning.postman.com/docs/writing-scripts/script-references/postman-sandbox-api-reference/#sending-requests-from-scripts)\n*   [Writing tests](https://learning.postman.com/docs/writing-scripts/test-scripts/)\n    \n\n## Additional resources\n\n*   [Example](https://www.postman.com/postman/workspace/postman-answers/collection/9215231-b9133e48-73c3-4aa4-b189-e038ee4c5e00?ctx=documentation) in Postman Answers workspace\n*   [Dynamic requests](https://www.tiktok.com/@joycejetson/video/7075325324929666346) tiktok\n    \n\n## Next challenge\n\n*   [Parse HTML response](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-9f9419fe-5249-4b44-b07f-4cb3ef913c81)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16143001"
+	},
+	"item": [
+		{
+			"name": "Dynamic request bodies",
+			"item": [
+				{
+					"name": "color",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var rhex = pm.variables.replaceIn('{{$randomHexColor}}')\r",
+									"var hex_clean = rhex.slice(1)\r",
+									"//console.log(hex_clean)\r",
+									"\r",
+									"var URL = 'https://www.thecolorapi.com/id?hex='+hex_clean\r",
+									"//console.log(URL)\r",
+									"\r",
+									"pm.sendRequest(URL, (error, response) => {\r",
+									"  if (error) {\r",
+									"    console.log(error);\r",
+									"  } else {\r",
+									"  console.log(response);\r",
+									"  var hex = response.json().hex.value\r",
+									"  var rgb = response.json().rgb.value\r",
+									"  var name = response.json().name.value\r",
+									"\r",
+									"  var payload = {hex: hex,\r",
+									"                rgb: rgb,\r",
+									"                name: name};\r",
+									"\r",
+									"   var payload_str = JSON.stringify(payload)\r",
+									"   pm.collectionVariables.set('payload',payload_str)\r",
+									"\r",
+									"  }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Hex property is present',()=>{\r",
+									"    pm.expect(pm.response.json().data).to.haveOwnProperty('hex')\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{payload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://postman-echo.com/post",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "It's time to work on your next challenge.\n\n1. **Add a request**: Add a request called `color` to the folder `Dynamic request bodies` with the following details:\n  - `POST` request method\n  - `https://postman-echo.com/post` request URL\n  - <code>\\{{payload\\}}</code> request body formatted as raw JSON\n1. **Dynamically set the payload**: Under the **Pre-request Script** tab, set a variable (any type you prefer) called `payload` to send in the request body. The payload should consist of the following parts:\n  - Dynamically generate a random hex code using [the faker library](https://learning.postman.com/docs/writing-scripts/script-references/variables-list/)\n  - Use [`pm.sendRequest()`](https://learning.postman.com/docs/writing-scripts/script-references/postman-sandbox-api-reference/#sending-requests-from-scripts) to make a `GET` request to [The Color API](https://www.thecolorapi.com/docs#colors-color-identification-get)'s endpoint to get the random hex code's rgb value and name. \n\n  Construct the entire payload in the pre-request script so that the variable `payload` can be sent as <code>\\{{payload\\}}</code> in the **Body** tab. The payload should look like this:\n```\n{\n    hex: \"#170d58\",\n    rgb: \"rgb(23, 13, 88)\",\n    name: \"Violent Violet\"\n}\n```\n\n  Make sure the payload is sending as you expect it to. Sending the request again should change the payload dynamically. Remember you can check the Postman console to debug unexpected behavior.\n1. **Add two tests**: Write a test to ensure a successful response status code. Then write another test to validate at least one property in your response body. Send the request to make sure the tests pass, and save your changes. \n\nOnce you complete these steps, move on to the next folder in this collection to submit your solution. Follow the instructions in the request documentation.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 5\r",
+									"\r",
+									"let collection = pm.response.json().collection\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct collection returned\", () => {\r",
+									"    pm.expect(collection.info.name).equals(\"Day 25: Dynamic request bodies\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Request added correctly\", () => {\r",
+									"    pm.expect(collection.item[0].item.length, 'check number of requests').equals(1)\r",
+									"\r",
+									"    let colorRequest = collection.item[0].item.find(req => { return req.name === \"color\"})\r",
+									"    pm.expect(colorRequest.name, 'check name').equals(\"color\")\r",
+									"    pm.expect(colorRequest.request.method, 'check method').equals(\"POST\")\r",
+									"    pm.expect(colorRequest.request.url.raw, 'check url').equals(\"https://postman-echo.com/post\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Scripts added correctly\", () => {\r",
+									"    let colorRequest = collection.item[0].item.find(req => { return req.name === \"color\"})\r",
+									"\r",
+									"    let prerequest = colorRequest.event.find(event => {return event.listen === \"prerequest\"})\r",
+									"    pm.expect(prerequest.listen, 'check pre script').equals(\"prerequest\")\r",
+									"    pm.expect(prerequest.script.exec.toString(), 'check prerequest syntax dynamic variable').to.include(\"pm.variables.replaceIn\")\r",
+									"    pm.expect(prerequest.script.exec.toString(), 'check prerequest syntax async request').to.include(\"pm.sendRequest\")\r",
+									"    pm.expect(prerequest.script.exec.toString(), 'check prerequest syntax color api').to.include(\"thecolorapi\")\r",
+									"\r",
+									"    let test = colorRequest.event.find(event => {return event.listen === \"test\"})\r",
+									"    pm.expect(test.listen, 'check test script').equals(\"test\")\r",
+									"    pm.expect(test.script.exec.toString(), 'check test syntax').to.include(\"pm.test\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media1.giphy.com/media/fvwOxjwlzR7yUuC88c/giphy.gif?cid=ecf05e478iktcsr71s4uqco76mufu8rvoilppai8xojjtz91&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media4.giphy.com/media/L7Nnb9j5NU48g/giphy.gif?cid=ecf05e47xfgazqs3ff52onkuslwvju2nuqlsjy3z3u9c7t2x&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.getpostman.com/collections/{{collectionId}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"collections",
+								"{{collectionId}}"
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Use a Postman environment:** Find the `Postman API env` environment from the previous challenge. Update the `collectionUid` with the current collection's ID.\n1. **Validate your solution**: Save your changes in the collection and environment. Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, you are done with today's challenge. Remember to save your changes as you'll need to pass all the challenges to claim a **30 days of Postman** badge."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "payload",
+			"value": ""
+		}
+	]
+}
