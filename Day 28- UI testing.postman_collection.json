@@ -1,0 +1,249 @@
+{
+	"info": {
+		"_postman_id": "3b5a0d43-cbc3-4212-9c6b-a25065f97354",
+		"name": "Day 28: UI testing",
+		"description": "## Instructions for Day 28: UI testing\n\n1.  **Get the challenge:** Fork [the parent collection `Day 28: UI testing`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-01eeea90-778a-4d8f-82b6-87e16ca7d45e) from the main workspace to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [Variables](https://learning.postman.com/docs/sending-requests/variables/)\n*   [Scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/)\n*   [Writing tests](https://learning.postman.com/docs/writing-scripts/test-scripts/)\n    \n\n## Additional resources\n\n*   [UI Testing with Postman](https://medium.com/better-practices/ui-testing-with-postman-df713eb9788c) blog and code samples\n*   [UI testing](https://www.tiktok.com/@joycejetson/video/7076498531346861355) tiktok\n    \n\n## Next challenge\n\n*   [Webhooks](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-7d96fb0a-52d9-4c7e-b044-6f5c3f6ee12f)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16143001"
+	},
+	"item": [
+		{
+			"name": "UI testing",
+			"item": [
+				{
+					"name": "response time",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "lighthouse",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var resp = pm.response.json()\r",
+									"\r",
+									"var performance_score = resp.lighthouseResult.categories.performance.score\r",
+									"\r",
+									"pm.test(\"Lighthouse performance score is between 90-100\",()=>{\r",
+									"    pm.expect(performance_score).to.be.within(90,100)\r",
+									"\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url={{url}}",
+							"protocol": "https",
+							"host": [
+								"www",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"pagespeedonline",
+								"v5",
+								"runPagespeed"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "{{url}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "It's time to work on your next challenge.\n\nIn the same way you use Postman to interact with APIs, you can also request web pages (just like a browser) [to investigate performance, functionality, security, integrity and accessibility](https://medium.com/better-practices/ui-testing-with-postman-df713eb9788c).\n\n1. **Pick a website to test**: Add a collection variable called `url` with the value of any website that you want to test, formatted like `https://google.com`.\n1. **Add a performance test**: Add a request called `response time` to the folder `UI testing` with the following details:\n  - `GET` request method\n  - <code>\\{{url\\}}</code> request URL\n  - Add a test using one of the popular snippets, and update the test to ensure the response time is less than 1000ms.\n\n  Make sure your request and test are functioning as expected. The test should not pass if the response time is greater than or equal to 1000ms.\n1. **Add a second test**: Let's use Google's [PageSpeed API](https://developers.google.com/speed/docs/insights/v5/get-started) to evaluate our webpage scores. Add a second request, called `lighthouse`:\n  - `GET` request method\n  - `https://www.googleapis.com/pagespeedonline/v5/runPagespeed` request URL\n  - Query parameter `url` with a value of <code>\\{{url\\}}</code>\n  - Add a test to assert the PageSpeed API gives our webpage a lighthouse performance score of at least `90` - so the test should pass if the score is between 90 and 100.\n\nFor both requests, it's okay for the tests you write to fail. Just be sure you're testing the responses properly.\n\nOnce you complete these steps, move on to the next folder in this collection to submit your solution. Follow the instructions in the request documentation.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 5\r",
+									"\r",
+									"let collection = pm.response.json().collection\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct collection returned\", () => {\r",
+									"    pm.expect(collection.info.name).equals(\"Day 28: UI testing\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Request added correctly\", () => {\r",
+									"    pm.expect(collection.item[0].item.length, 'check number of requests').equals(2)\r",
+									"\r",
+									"    let responseRequest = collection.item[0].item.find(req => { return req.name === \"response time\"})\r",
+									"    pm.expect(responseRequest.name, 'check response time name').equals(\"response time\")\r",
+									"    pm.expect(responseRequest.request.method, 'check response time method').equals(\"GET\")\r",
+									"    pm.expect(responseRequest.request.url.raw, 'check response time url').includes(\"{{url}}\")\r",
+									"    \r",
+									"    let url = collection.variable.find(variable => { return variable.key === \"url\"})\r",
+									"    pm.expect(url, 'check collection variable').to.exist\r",
+									"\r",
+									"    let lightRequest = collection.item[0].item.find(req => { return req.name === \"lighthouse\"})\r",
+									"    pm.expect(lightRequest.name, 'check lighthouse name').equals(\"lighthouse\")\r",
+									"    pm.expect(lightRequest.request.method, 'check lighthouse method').equals(\"GET\")\r",
+									"    pm.expect(lightRequest.request.url.raw, 'check lighthouse url').includes(\"https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url={{url}}\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Tests added correctly\", () => {\r",
+									"    let responseRequest = collection.item[0].item.find(req => { return req.name === \"response time\"})\r",
+									"    let test = responseRequest.event.find(event => {return event.listen === \"test\"})\r",
+									"    pm.expect(test.script.exec.toString(), 'check response time test').to.include(\"pm.test\")\r",
+									"    pm.expect(test.script.exec.toString(), 'check 1000ms test').to.include(\"1000\")\r",
+									"\r",
+									"    let lightRequest = collection.item[0].item.find(req => { return req.name === \"lighthouse\"})\r",
+									"    let test2 = lightRequest.event.find(event => {return event.listen === \"test\"})\r",
+									"    pm.expect(test2.script.exec.toString(), 'check lighthouse test').to.include(\"pm.test\")\r",
+									"    pm.expect(test2.script.exec.toString(), 'check lighthouse score test').to.include(\"90\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media2.giphy.com/media/IhvYFmzVNHgCQ/giphy.gif?cid=ecf05e47z6x8tomdznlb8zott07kzr1kbvcoeklnoqcbpimg&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media1.giphy.com/media/2RCQ345oLZSVi/giphy.gif?cid=ecf05e47zzsolbpfh0h1mp0ypnqlvuzc2xtodaprxs4yrk4p&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.getpostman.com/collections/{{collectionId}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"collections",
+								"{{collectionId}}"
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Use a Postman environment:** Find the `Postman API env` environment from the previous challenge. Update the `collectionUid` with the current collection's ID.\n1. **Validate your solution**: Save your changes in the collection and environment. Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, you are done with today's challenge. Remember to save your changes as you'll need to pass all the challenges to claim a **30 days of Postman** badge."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://github.com/",
+			"type": "string"
+		}
+	]
+}

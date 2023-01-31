@@ -1,0 +1,433 @@
+{
+	"info": {
+		"_postman_id": "bf5e3112-55f8-499b-a568-f775c18d89d8",
+		"name": "Day 29: Webhooks",
+		"description": "## Instructions for Day 29: Webhooks\n\n1.  **Get the challenge:** Fork [the parent collection `Day 29: Webhooks`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-7d96fb0a-52d9-4c7e-b044-6f5c3f6ee12f) from the main workspace to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [Set up integrations to receive alerts](https://learning.postman.com/docs/designing-and-developing-your-api/monitoring-your-api/integrations-for-alerts/)\n*   [Postman API](https://www.postman.com/postman/workspace/postman-public-workspace/documentation/12959542-c8142d51-e97c-46b6-bd77-52bb66712c9a)\n    \n\n## Additional resources\n\n*   [Custom webhook integrations](https://learning.postman.com/docs/integrations/webhooks/)\n*   [Webhooks](https://www.tiktok.com/@joycejetson/video/7077919413122370862) tiktok\n    \n\n## Next challenge\n\n*   [Submit a pull request](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-88dc2f3e-8335-40f5-857d-cc053bdaa8ee)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16143001"
+	},
+	"item": [
+		{
+			"name": "Webhooks",
+			"item": [
+				{
+					"name": "echo",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let incomingPayload = JSON.parse(globals.previousRequest).data\r",
+									"pm.collectionVariables.set(\"newPayload\", incomingPayload.message)\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"console.log('Echoing my payload: ', pm.response.json().data)\r",
+									"\r",
+									"postman.setNextRequest(null)\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{newPayload}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://postman-echo.com/post",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Webhook",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{postman_api_key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"webhook\":{\n        \"name\": \"{{webhookName}}\",\n        \"collection\": \"{{collectionUid}}\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.getpostman.com/webhooks?workspace={{workspaceId}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"webhooks"
+							],
+							"query": [
+								{
+									"key": "workspace",
+									"value": "{{workspaceId}}",
+									"description": "Optional. A workspace ID in which to create the webhook.\n\nIf you do not include this query parameter, the system creates the webhook in your \"My Workspace\" workspace."
+								}
+							]
+						},
+						"description": "Creates a webhook that triggers a collection with a custom payload. You can get the webhook's URL from the `webhookUrl` property in the endpoint's response.\n\nInclude the following properties in a `webhook` object in the request body:\n\n*   `name` — The webhook's name. On success, the system creates a new monitor with this name in the **Monitors** tab.\n*   `collection` — The collection UID to trigger when calling this webhook."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-workspace-id",
+										"value": "c90a3482-f80d-43d6-9dfb-0830f5e43605"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"webhook\":{\n        \"name\": \"Test Webhook\",\n        \"collection\": \"12345678-12ece9e1-2abf-4edc-8e34-de66e74114d2\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.getpostman.com/webhooks?workspace=1f0df51a-8658-4ee8-a2a1-d2567dfa09a9",
+									"protocol": "https",
+									"host": [
+										"api",
+										"getpostman",
+										"com"
+									],
+									"path": [
+										"webhooks"
+									],
+									"query": [
+										{
+											"key": "workspace",
+											"value": "1f0df51a-8658-4ee8-a2a1-d2567dfa09a9",
+											"description": "Optional. A workspace ID in which to create the webhook.\n\nIf you do not include this query parameter, the system creates the webhook in your \"My Workspace\" workspace."
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"webhook\": {\n        \"id\": \"1f0df51a-8658-4ee8-a2a1-d2567dfa09a9\",\n        \"name\": \"Test Webhook\",\n        \"collection\": \"12345678-12ece9e1-2abf-4edc-8e34-de66e74114d2\",\n        \"webhookUrl\": \"https://newman-api.getpostman.com/run/12345678/267a6e99-b6da-407c-a96f-03be2d6282fb\",\n        \"uid\": \"12345678-1f0df51a-8658-4ee8-a2a1-d2567dfa09a9\"\n    }\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-workspace-id",
+										"value": "c90a3482-f80d-43d6-9dfb-0830f5e43605"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"webhook\":{\n        \"name\": \"Test Webhook\",\n        \"collection\": \"12345678-12ece9e1-2abf-4edc-8e34-de66e74114d2\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.getpostman.com/webhooks?workspace=1f0df51a-8658-4ee8-a2a1-d2567dfa09a9",
+									"protocol": "https",
+									"host": [
+										"api",
+										"getpostman",
+										"com"
+									],
+									"path": [
+										"webhooks"
+									],
+									"query": [
+										{
+											"key": "workspace",
+											"value": "1f0df51a-8658-4ee8-a2a1-d2567dfa09a9",
+											"description": "Optional. A workspace ID in which to create the webhook.\n\nIf you do not include this query parameter, the system creates the webhook in your \"My Workspace\" workspace."
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Trigger Webhook",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"message\": \"yellow world\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://newman-api.getpostman.com/run/16143001/b94897fc-f621-40ea-92d5-c172daceb690",
+							"protocol": "https",
+							"host": [
+								"newman-api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"run",
+								"16143001",
+								"b94897fc-f621-40ea-92d5-c172daceb690"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "It's time to work on your next challenge.\n\nIn this example, we will create a webhook and trigger it, all from the same collection that we will run. That's a bit meta, but allows us to keep everything in one spot for this example. In the future, you will probably create, trigger, and run the webhook from separate entities.\n\n1. **Add a request to be run**: Add the following request called `echo` to the folder `Webhooks`.\n    \n    - `POST` request method\n    - `https://postman-echo.com/post` request URL\n    \n    Under the **Pre-request Script** tab, add this code to receive a future payload and store this information as a collection variable called `newPayload`.\n    \n    ```\n    let incomingPayload = JSON.parse(globals.previousRequest).data\n    pm.collectionVariables.set(\"newPayload\", incomingPayload.message)\n    \n    ```\n    \n    Under the **Body** tab, add `{{newPayload}}` as a raw JSON body to send to this endpoint.Under the **Tests** tab, add the following code.\n    - Add test to verify a successful `200` response\n    - Add `postman.setNextRequest(null)`, so that when you run the collection only the first request will execute\n    - Add `console.log('Echoing my payload: ', pm.response.json().data)` to log the payload to the console\n2. **Create a webhook**: If you haven't already, fork the [parent collection for the Postman API](https://www.postman.com/postman/workspace/postman-public-workspace/documentation/12959542-c8142d51-e97c-46b6-bd77-52bb66712c9a) into your own workspace. Find a request to `Create Webhook` and duplicate it over as the second request in the folder `Webhooks`.\n    \n    - Set up authorization of this request using any method you prefer.\n    - Set the variables for `workspaceId`, `webhookName`, and `collectionUid` using any method you prefer. Use the ID of your current public workspace. The name of the webhook should be `echo webhook`. Use the ID of this collection.\n    \n    Send the call to create the webhook, and make a note of the `webhookUrl` for the next step.\n3. **Trigger the webhook**: Add the following request called `Trigger Webhook` as the third request in the folder `Webhooks`.\n    - `POST` request method\n    - The request URL is the `webhookUrl` received in the previous step; paste that value into the URL field\n    - The request body will contain a payload with a property `message` for our first call to parse it properly, like this:\n        \n        ```\n        {\n        \"message\": \"yellow world\"\n        }\n        \n        ```\n        \n\nSend this call to trigger the webhook.\n\n4\\. **Verify webhook triggered**: Behind the scenes, this webhook functions like a monitor run. This means our console statements are logged in the monitor console. Select the **Monitors** tab on the left, and find the name of your webhook. Click on the last run, scroll down to see the results, and then tab over to **Console Log**. Make sure your console statement contains the payload you sent in the previous step.\n\nOnce you complete these steps, save your changes, and then move on to the next folder in this collection to submit your solution. Follow the instructions in the request documentation.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 6\r",
+									"\r",
+									"let collection = pm.response.json().collection\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct collection returned\", () => {\r",
+									"    pm.expect(collection.info.name).equals(\"Day 29: Webhooks\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"let folder = collection.item.find(fol => { return fol.name === \"Webhooks\"})\r",
+									"\r",
+									"pm.test(\"Requests added\", () => {\r",
+									"    pm.expect(folder.item.length, 'check number of requests').equals(3)\r",
+									"\r",
+									"    let echoRequest = folder.item.find(req => { return req.name === \"echo\"})\r",
+									"    pm.expect(echoRequest.name, 'check echo request name').equals(\"echo\")\r",
+									"    pm.expect(echoRequest.request.method, 'check echo request method').equals(\"POST\")\r",
+									"    pm.expect(echoRequest.request.url.raw, 'check response time url').includes(\"https://postman-echo.com/post\")\r",
+									"\r",
+									"    let createRequest = folder.item.find(req => { return req.name === \"Create Webhook\" | req.name === \"Create Webhook Copy\" })\r",
+									"    pm.expect(createRequest.name, 'check create request name').includes(\"Create Webhook\")\r",
+									"    pm.expect(createRequest.request.method, 'check create request method').equals(\"POST\")\r",
+									"    pm.expect(createRequest.request.url.raw, 'check create request url').includes(\"https://api.getpostman.com/webhooks?workspace\")\r",
+									"\r",
+									"    let triggerRequest = folder.item.find(req => { return req.name === \"Trigger Webhook\"})\r",
+									"    pm.expect(triggerRequest.name, 'check trigger request name').equals(\"Trigger Webhook\")\r",
+									"    pm.expect(triggerRequest.request.method, 'check trigger request method').equals(\"POST\")\r",
+									"    pm.expect(triggerRequest.request.url.raw, 'check trigger request url').includes(\"https://newman-api.getpostman.com/run\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Echo Scripts added\", () => {\r",
+									"    let echoRequest = folder.item.find(req => { return req.name === \"echo\"})\r",
+									"\r",
+									"    pm.expect(echoRequest.request.body.raw).equals(\"{{newPayload}}\")\r",
+									"\r",
+									"    let preReq = echoRequest.event.find(event => {return event.listen === \"prerequest\"})\r",
+									"    pm.expect(preReq.script.exec.toString(), 'check preReq previous request capture').to.include(\"globals.previousRequest\")\r",
+									"    pm.expect(preReq.script.exec.toString(), 'check preReq set variable').to.include(\"pm.collectionVariables.set\")\r",
+									"\r",
+									"    let test = echoRequest.event.find(event => {return event.listen === \"test\"})\r",
+									"    pm.expect(test.script.exec.toString(), 'check test').to.include(\"pm.test\")\r",
+									"    pm.expect(test.script.exec.toString(), 'check setNextRequest test').to.include(\"postman.setNextRequest(null)\")\r",
+									"    pm.expect(test.script.exec.toString(), 'check console log test').to.include(\"console.log\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Payload sent\", () => {\r",
+									"    let triggerRequest = folder.item.find(req => { return req.name === \"Trigger Webhook\"})\r",
+									"    pm.expect(triggerRequest.request.body.raw.toString()).includes(\"message\")\r",
+									"\r",
+									"        pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media1.giphy.com/media/Y8ybhoMQg8ZZ6/giphy.gif?cid=ecf05e476lthr8qqejm0mytmax3btowdnrsu84nsv0x5c5vt&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media3.giphy.com/media/5QTJd4EtCjXEd9QSy2/giphy.gif?cid=ecf05e47zzsolbpfh0h1mp0ypnqlvuzc2xtodaprxs4yrk4p&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.getpostman.com/collections/{{collectionId}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"collections",
+								"{{collectionId}}"
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Use a Postman environment:** Find the `Postman API env` environment from the previous challenge. Update the `collectionUid` with the current collection's ID.\n1. **Validate your solution**: Save your changes in the collection and environment. Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, you are done with today's challenge. Remember to save your changes as you'll need to pass all the challenges to claim a **30 days of Postman** badge."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "webhookName",
+			"value": "echo webhook",
+			"type": "string"
+		},
+		{
+			"key": "workspaceId",
+			"value": "324126c7-90b9-4316-b74b-9e3ee267b32b",
+			"type": "string"
+		},
+		{
+			"key": "collectionUid",
+			"value": "16143001-bf5e3112-55f8-499b-a568-f775c18d89d8",
+			"type": "string"
+		}
+	]
+}

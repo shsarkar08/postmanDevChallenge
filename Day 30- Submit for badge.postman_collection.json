@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "87e723d2-418b-4cb6-b131-2821dcbe4794",
+		"name": "Day 30: Submit for badge",
+		"description": "## Instructions for Day 30: Submit for badge\n\n1. **Get the challenge:** Fork [the parent collection `Day 30: Submit for badge`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-88dc2f3e-8335-40f5-857d-cc053bdaa8ee) to your own public workspace.\n2. **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3. **Submit your solution:** Select the second folder `Submit for badge` and follow the instructions in the documentation to validate your solution.\n  \n## Additional learning resources\n\nCheck out [additional hands-on learning courses by Postman](https://badgr.com/public/issuers/BC0x4AQaQPC7lFilsBP_tQ/badges).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16143001"
+	},
+	"item": [
+		{
+			"name": "Submit for badge",
+			"item": [
+				{
+					"name": "submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"submit the required information\": \"https://go.pstmn.io/submit-badge\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://postman-echo.com/post",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Our time together is coming to an end. It's the final test of your Postman skills.\n\n1. **Validate your solutions locally**: You should have been checking your solutions locally for every challenge. If you haven't done that already, run through those validations now since your pull request will not be accepted with any errors.\n2. **Submit your information**: In this collection `Day 30: Submit for badge`, run the request `submit` and follow the instructions.\n    \n\n**Need help?** If you have a question related to the administration of this badge (e.g. not a technical Postman question), you can ask for guidance in the [Training](https://community.postman.com/c/training/38) section of the community forum.\n\nOnce your validations pass, you will receive a **30 day challenge** badge to proudly display on your social media profiles.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "mockURL",
+			"value": "https://88d3ce90-a071-4e4b-84bc-d4092d42c9e8.mock.pstmn.io"
+		}
+	]
+}
